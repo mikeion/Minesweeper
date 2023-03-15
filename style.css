@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+#game-board {
+  border-collapse: collapse;
+}
+
+#game-board td {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+#game-board .revealed {
+  background-color: #ddd;
+}
+
+#game-board .mine {
+  background-color: red;
+}

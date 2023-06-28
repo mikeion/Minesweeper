@@ -71,6 +71,28 @@ function handleClick(row, col, board) {
   board[row][col] = { ...cell, revealed: true };
   boardCell.classList.add("revealed");
 
+  // Reveal all adjacent blank cells and their adjacent cells
+  if (!cell.mine) {
+    for (let r = -1; r <= 1; r++) {
+      for (let c = -1; c <= 1; c++) {
+        const newRow = row + r;
+        const newCol = col + c;
+
+        if (
+          newRow >= 0 &&
+          newRow < BOARD_SIZE &&
+          newCol >= 0 &&
+          newCol < BOARD_SIZE &&
+          !board[newRow][newCol].mine &&
+          countAdjacentMines(newRow, newCol, board) === 0
+        ) 
+        {
+          handleClick(newRow, newCol, board);
+        }
+      }
+    }
+  }
+
   if (cell.mine) {
     boardCell.classList.add("mine");
     alert("Game over! You hit a mine.");

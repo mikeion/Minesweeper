@@ -1,10 +1,15 @@
-const BOARD_SIZE = 10;
-const MINE_COUNT = 10;
+let BOARD_SIZE;
+let MINE_COUNT;
 
+// Replace the old createBoard function with the new one
 function createBoard() {
   const board = [];
   for (let i = 0; i < BOARD_SIZE; i++) {
-    board.push(new Array(BOARD_SIZE).fill({ mine: false, revealed: false }));
+    const row = [];
+    for (let j = 0; j < BOARD_SIZE; j++) {
+      row.push({ mine: false, revealed: false });
+    }
+    board.push(row);
   }
   return board;
 }
@@ -148,5 +153,31 @@ function initGame() {
   placeMines(board);
   renderBoard(board);
 }
+
+function startGame() {
+  const difficulty = document.getElementById("difficulty").value;
+  
+  switch (difficulty) {
+    case "beginner":
+      BOARD_SIZE = 9;
+      MINE_COUNT = 10;
+      break;
+    case "intermediate":
+      BOARD_SIZE = 16;
+      MINE_COUNT = 40;
+      break;
+    case "advanced":
+      BOARD_SIZE = 20;
+      MINE_COUNT = 80;
+      break;
+    default:
+      BOARD_SIZE = 9;
+      MINE_COUNT = 10;
+  }
+  
+  initGame();
+}
+
+document.getElementById("start-game").addEventListener("click", startGame);
 
 document.addEventListener("DOMContentLoaded", initGame);
